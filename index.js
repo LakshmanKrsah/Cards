@@ -4,14 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 
-// CORS Configuration
-app.use(cors({
-  origin: 'https://your-frontend-url.vercel.app',  // Replace with your actual frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
@@ -20,7 +14,7 @@ mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true
 })
 .then(() => console.log("MongoDB Connected"))
-.catch(err => console.error("MongoDB connection error:", err));
+.catch(err => console.error(err));
 
 // Mongoose Schema & Model
 const cardSchema = new mongoose.Schema({
@@ -39,11 +33,6 @@ app.get('/api/cards', async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
-});
-
-// Health Check Route
-app.get('/', (req, res) => {
-    res.send("Backend is running");
 });
 
 // Start Server
