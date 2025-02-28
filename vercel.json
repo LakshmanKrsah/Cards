@@ -1,17 +1,12 @@
 {
    "version": 2,
-   "name": "music-album",
+   "name": "cards-backend",
    "builds": [
-     {
-       "src": "app.js",
-       "use": "@vercel/node"
-     }
+     { "src": "index.js", "use": "@vercel/node" }
    ],
    "routes": [
-     {
-       "src": "/api/(.*)",
-       "dest": "/app.js"
-     }
+     { "src": "/api/(.*)", "dest": "/index.js" },
+     { "src": "/", "dest": "/index.js" }
    ]
  }
  
